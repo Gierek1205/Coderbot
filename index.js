@@ -30,10 +30,8 @@ app.post('/webhook', function (req, res) {
         var event = events[i];
         if (event.message && event.message.text) {
 			if(event.message === 'siema'){
-            sendMessage(event.sender.id, {text: "Wez przestan... "});
-			}else{
-				sendMessage(event.sender.id, {text: "co chesz???"});
-			}
+				sendMessage(event.sender.id, {text: "Echo: " + event.sender.message});
+			
         }
     }
     res.sendStatus(200);

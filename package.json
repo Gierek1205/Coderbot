@@ -4,9 +4,10 @@
   "description": "TestBot Server App",
   "main": "index.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
-  "author": "to ja",
+  "author": "Franek Matusiak",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.0",

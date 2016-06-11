@@ -21,17 +21,7 @@ app.get('/', function (req, res) {
     }
 });
 
-// handler receiving messages
-app.post('/', function (req, res) {
-    var events = req.body.entry[0].messaging;
-    for (i = 0; i < events.length; i++) {
-        var event = events[i];
-        if (event.message && event.message.text) {
-            sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
-        }
-    }
-    res.sendStatus(200);
-});
+
 
 // MY CODE --------------------------------------------
 app.post('/', function (req, res) {
@@ -47,6 +37,8 @@ app.post('/', function (req, res) {
 			if(event.message.text === '@maciek')
 			{
 				sendMessage(event.sender.id, "Maciek nie umie javascripta");
+			}else{
+				sendMessage(event.sender.id, "try: @help");
 			}
             
         }

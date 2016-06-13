@@ -8,12 +8,12 @@ app.use(bodyParser.json());
 app.listen((process.env.PORT || 3000));
 
 // Server frontpage
-app.get('/webhook', function (req, res) {
+app.get('/', function (req, res) {
     res.send('This is TestBot Server');
 });
 
 // Facebook Webhook
-app.get('/', function (req, res) {
+app.get('/webhook', function (req, res) {
     if (req.query['hub.verify_token'] === 'testbot_verify_token') {
         res.send(req.query['hub.challenge']);
     } else {
@@ -22,7 +22,7 @@ app.get('/', function (req, res) {
 });
 
 // handler receiving messages
-app.post('/', function (req, res) {
+app.post('/webhook', function (req, res) {
     var events = req.body.entry[0].messaging;
     for (i = 0; i < events.length; i++) {
         var event = events[i];
@@ -35,7 +35,7 @@ app.post('/', function (req, res) {
 
 // MY CODE --------------------------------------------
 
-  app.post('/', function (req, res) {
+  app.post('/webhook', function (req, res) {
     let messaging_events = req.body.entry[0].messaging
     for (let i = 0; i < messaging_events.length; i++) {
       let event = req.body.entry[0].messaging[i]

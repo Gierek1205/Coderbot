@@ -35,7 +35,7 @@ app.post('/webhook', function(req, res) {
 			}else if(event.message.text === "!time")
 			{
 				
-					sendMessage(event.sender.id, { text: "Jest godzina" + moment().hour()});
+					sendMessage(event.sender.id, { text: "Jest godzina"});
 			
 			}else if{
 					sendMessage(event.sender.id, {

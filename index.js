@@ -41,6 +41,8 @@ app.post('/webhook', function(req, res) {
 					sendMessage(event.sender.id, {
 						text: "Maciek: " + event.message.text
 					});
+					sendMessage(event.sender.id, {
+						text: "Jesli nie wiesz co zrobic wpisz !help"});
 				}
 		}
 	}

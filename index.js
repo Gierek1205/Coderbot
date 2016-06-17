@@ -29,9 +29,14 @@ app.post('/webhook', function(req, res) {
 	for (i = 0; i < events.length; i++) {
 		var event = events[i];
 		if (event.message && event.message.text) {
-			sendMessage(event.sender.id, {
-				text: "Maciek: " + event.message.text
-			});
+			
+			if(event.message.text === "!help"){
+				sendMessage(event.sender.id, { text: "!pogoda, !godzina, itp.. itd..."});
+			}else{
+					sendMessage(event.sender.id, {
+						text: "Maciek: " + event.message.text
+					});
+				}
 		}
 	}
 	res.sendStatus(200);

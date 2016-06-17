@@ -37,7 +37,7 @@ app.post('/webhook', function(req, res) {
 				
 					sendMessage(event.sender.id, { text: "Jest godzina"});
 			
-			}else if{
+			}else{
 					sendMessage(event.sender.id, {
 						text: "Maciek: " + event.message.text
 					});

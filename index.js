@@ -32,7 +32,7 @@ app.post('/webhook', function(req, res) {
 		if (event.message && event.message.text) {
 			
 			if(event.message.text === "!help"){
-				sendMessage(event.sender.id, { text: "!pogoda, !time, itp.. itd..."});
+				sendMessage(event.sender.id, { text: "!pogoda, !time, !godziny itp.. itd..."});
 			}else if(event.message.text === "!time")
 			{
 				
@@ -44,6 +44,22 @@ app.post('/webhook', function(req, res) {
 					});
 					sendMessage(event.sender.id, {
 						text: "Jesli nie wiesz co zrobic wpisz !help"});
+				}
+				else if(event.message.tekst==="!godziny")
+				{
+					sendMessage(event.sender.id,{
+						text: "godziny otwarcia:"
+					}
+					)
+					sendMessage(event.sender.id,{
+						text: "9.00-11.00- kodowanie dla dzieci"
+					}
+					)
+					sendMessage(event.sender.id,{
+						text: "11.00-13- kodowanie dla młodzieży"
+					}
+					)
+					
 				}
 		}
 	}

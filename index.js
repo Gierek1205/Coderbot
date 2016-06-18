@@ -44,21 +44,9 @@ app.post('/webhook', function(req, res) {
 					});
 					sendMessage(event.sender.id, {
 						text: "Jesli nie wiesz co zrobic wpisz !help"});
-				}else if(event.message.text==="!godziny")
-				{
-					sendMessage(event.sender.id,{
-						text: "godziny otwarcia:"
-					}
-					)
-					sendMessage(event.sender.id,{
-						text: "9.00-11.00- kodowanie dla dzieci"
-					}
-					)
-					sendMessage(event.sender.id,{
-						text: "11.00-13- kodowanie dla młodzieży"
-					}
-					)
+				}
 					
+				
 				}
 		}
 	}

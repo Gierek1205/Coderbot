@@ -44,8 +44,7 @@ app.post('/webhook', function(req, res) {
 					});
 					sendMessage(event.sender.id, {
 						text: "Jesli nie wiesz co zrobic wpisz !help"});
-				}
-				else if(event.message.tekst==="!godziny")
+				}else if(event.message.text==="!godziny")
 				{
 					sendMessage(event.sender.id,{
 						text: "godziny otwarcia:"

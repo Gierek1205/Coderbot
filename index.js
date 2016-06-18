@@ -22,7 +22,7 @@ app.get('/webhook', function(req, res) {
 		res.send('Invalid verify token');
 	}
 });
-var test = 0;
+
 // handler receiving messages---------------------------------------------------------------------------------------------------------
 app.post('/webhook', function(req, res) {
 	var events = req.body.entry[0].messaging;
@@ -48,15 +48,18 @@ app.post('/webhook', function(req, res) {
 				};
 
 
-			} else if (event.message.text === "!info") {
+			} else if (event.message.text.split(" ")[0] === "!info") {
 
-
+				if (event.message.text.split(" ")[1] === "warszawa") {
+					sendMessage(event.sender.id, {
+						text: "dzis nie ma zajec w warszawie"
+					});
+				}
 
 			} else {
 				sendMessage(event.sender.id, {
-					text: "CodeDojo: Jesli nie wiesz co zrobic wpisz !help." + "     " + test;
+					text: "CodeDojo: Jesli nie wiesz co zrobic wpisz !help."
 				});
-				test++;
 			}
 		}
 	}

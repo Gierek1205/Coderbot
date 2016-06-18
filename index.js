@@ -27,7 +27,6 @@ app.get('/webhook', function(req, res) {
 app.post('/webhook', function(req, res) {
 
 	// our variables
-	event.message.text = event.message.text.toLowerCase();
 
 	var cities = ["warszawa", "cieszyn", "cisie", "zambrow", "bialystok"];
 
@@ -36,14 +35,14 @@ app.post('/webhook', function(req, res) {
 		var event = events[i];
 		if (event.message && event.message.text) {
 
-			if (event.message.text === "miasta") {
+			if (event.message.text.toLowerCase() === "miasta") {
 				sendMessage(event.sender.id, {
 					text: "Wpisz (w nastepnej wiadomosci) nazwe dowolego miasta, w ktorym jest Coderdojo."
 				});
 			}
 
 			for (var i = 0; i < cities.length; i++) {
-				if (event.message.text === cities[i]) {
+				if (event.message.text.toLowerCase() === cities[i]) {
 					sendMessage(event.sender.id, {
 						text: "Wybrano miasto: " + cities[i] + ", strona internetowa tego Coderdojo to: " + cities[i] +
 							".coderdojo.org.pl"

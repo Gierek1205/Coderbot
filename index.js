@@ -25,31 +25,30 @@ app.get('/webhook', function(req, res) {
 
 // handler receiving messages---------------------------------------------------------------------------------------------------------
 app.post('/webhook', function(req, res) {
+
+	// our variables
+	event.message.text = event.message.text.toLowerCase();
+
+	var cities = ["warszawa", "cieszyn", "cisie", "zambrow", "bialystok"];
+
 	var events = req.body.entry[0].messaging;
-	var czas = new Date();
 	for (i = 0; i < events.length; i++) {
 		var event = events[i];
 		if (event.message && event.message.text) {
 
-			if (event.message.text === "!help") {
+			if (event.message.text === "miasta") {
 				sendMessage(event.sender.id, {
-					text: "!pogoda, !time, itp.. itd..."
+					text: "Wpisz (w nastepnej wiadomosci) nazwe dowolego miasta, w ktorym jest Coderdojo."
 				});
-			} else if (event.message.text === "!time") {
-				if (czas.getMinutes() < 10) {
-					"0" + czas.getMinutes();
-				}
-				sendMessage(event.sender.id, {
-					text: "Jest godzina " + (czas.getHours() + 2) + ":" + czas.getMinutes()
-				});
+			}
 
-			} else {
-				sendMessage(event.sender.id, {
-					text: "Maciek: " + event.message.text
-				});
-				sendMessage(event.sender.id, {
-					text: "Jesli nie wiesz co zrobic wpisz !help"
-				});
+			for (var i = 0; i < cities.length; i++) {
+				if (event.message.text === cities[i]) {
+					sendMessage(event.sender.id, {
+						text: "Wybrano miasto: " + cities[i] + ", strona internetowa tego Coderdojo to: " + cities[i]
+						".coderdojo.org.pl";
+					});
+				}
 			}
 		}
 	}

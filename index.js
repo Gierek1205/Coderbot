@@ -40,7 +40,7 @@ app.post('/webhook', function(req, res) {
 				sendMessage(event.sender.id, {
 					text: "Lista miast:"
 				});
-				setTimeout(function() {}, 2000);
+				setTimeout(function() {}, 3000);
 				for (var i = 0; i < cities.length; i++) {
 					sendMessage(event.sender.id, {
 						text: cities[i]

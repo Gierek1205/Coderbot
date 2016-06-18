@@ -22,7 +22,7 @@ app.get('/webhook', function(req, res) {
 		res.send('Invalid verify token');
 	}
 });
-
+var test = 0;
 // handler receiving messages---------------------------------------------------------------------------------------------------------
 app.post('/webhook', function(req, res) {
 	var events = req.body.entry[0].messaging;
@@ -33,12 +33,12 @@ app.post('/webhook', function(req, res) {
 
 			if (event.message.text === "!help") {
 				sendMessage(event.sender.id, {
-					text: "!miasta, !godziny, !info"
+					text: "!miasta, !godziny, !info <miasto>"
 				});
 			} else if (event.message.text === "!miasta") {
 
 				sendMessage(event.sender.id, {
-					text: "Lista miast:"
+					text: "Lista miast w których znajduje się CoderDojo:"
 				});
 				setTimeout(function() {}, 3000);
 				for (var i = 0; i < cities.length; i++) {
@@ -48,13 +48,15 @@ app.post('/webhook', function(req, res) {
 				};
 
 
+			} else if (event.message.text === "!info") {
+
+
+
 			} else {
 				sendMessage(event.sender.id, {
-					text: "Maciek: " + event.message.text
+					text: "CodeDojo: Jesli nie wiesz co zrobic wpisz !help." + "     " + test;
 				});
-				sendMessage(event.sender.id, {
-					text: "Jesli nie wiesz co zrobic wpisz !help"
-				});
+				test++;
 			}
 		}
 	}

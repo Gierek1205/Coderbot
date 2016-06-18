@@ -47,10 +47,7 @@ app.post('/webhook', function(req, res) {
 					});
 				};
 
-
 			} else if (event.message.text.split(" ")[0] === "!info") {
-
-
 
 				for (var z = 0; z < cities.length; z++) {
 					if (event.message.text.split(" ")[1].toLowerCase() === cities[z].toLowerCase()) {

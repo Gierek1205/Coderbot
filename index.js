@@ -45,8 +45,8 @@ app.post('/webhook', function(req, res) {
 			for (var i = 0; i < cities.length; i++) {
 				if (event.message.text === cities[i]) {
 					sendMessage(event.sender.id, {
-						text: "Wybrano miasto: " + cities[i] + ", strona internetowa tego Coderdojo to: " + cities[i]
-						".coderdojo.org.pl"
+						text: "Wybrano miasto: " + cities[i] + ", strona internetowa tego Coderdojo to: " + cities[i] +
+							".coderdojo.org.pl"
 					});
 				}
 			}

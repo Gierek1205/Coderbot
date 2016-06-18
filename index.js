@@ -41,6 +41,12 @@ app.post('/webhook', function(req, res) {
 					text: "Lista miast:"
 				});
 
+				for (var i = 0; i < cities.length; i++) {
+					sendMessage(event.sender.id, {
+						text: i + ":" + cities[i];
+					});
+				};
+
 
 			} else {
 				sendMessage(event.sender.id, {

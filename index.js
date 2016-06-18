@@ -45,7 +45,6 @@ app.post('/webhook', function(req, res) {
 					sendMessage(event.sender.id, {
 						text: cities[i]
 					});
-					setTimeout(function() {}, 1);
 				};
 
 

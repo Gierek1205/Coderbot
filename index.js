@@ -26,7 +26,8 @@ app.get('/webhook', function(req, res) {
 // handler receiving messages---------------------------------------------------------------------------------------------------------
 app.post('/webhook', function(req, res) {
 	var events = req.body.entry[0].messaging;
-	var cities = ["warszawa", "cieszyn", "poznan"];
+	var cities = ["Warszawa", "Cieszyn", "Cisie", "Zambrow", "Bialystok", "Gdansk", "Gliwice"];
+	var citiesSort = cities.sort();
 	for (i = 0; i < events.length; i++) {
 		var event = events[i];
 		if (event.message && event.message.text) {
@@ -41,9 +42,9 @@ app.post('/webhook', function(req, res) {
 					text: "Lista miast:"
 				});
 				setTimeout(function() {}, 2000);
-				for (var i = 0; i < cities.length; i++) {
+				for (var i = 0; i < citiesSort.length; i++) {
 					sendMessage(event.sender.id, {
-						text: i + ":" + cities[i]
+						text: i + ":" + citiesSort[i]
 					});
 				};
 

@@ -46,7 +46,7 @@ app.post('/webhook', function(req, res) {
 					sendMessage(event.sender.id, {
 						text: (i + 1) + ":" + citiesSort[i]
 					});
-					setTimeout(100);
+					setTimeout(function() {}, 100);
 				};
 
 

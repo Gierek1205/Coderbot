@@ -26,53 +26,56 @@ app.get('/webhook', function(req, res) {
 // handler receiving messages---------------------------------------------------------------------------------------------------------
 app.post('/webhook', function(req, res) {
 
-	// our variables
+			// our variables
 
-	var cities = ["warszawa", "cieszyn", "cisie", "zambrow", "bialystok"];
+			var cities = ["warszawa", "cieszyn", "cisie", "zambrow", "bialystok"];
 
-	var events = req.body.entry[0].messaging;
-	for (i = 0; i < events.length; i++) {
-		var event = events[i];
-		if (event.message && event.message.text) {
+			var events = req.body.entry[0].messaging;
+			for (i = 0; i < events.length; i++) {
+				var event = events[i];
+				if (event.message && event.message.text) {
 
-			if (event.message.text === "miasta") {
-				sendMessage(event.sender.id, {
-					text: "Wpisz (w nastepnej wiadomosci) nazwe dowolego miasta, w ktorym jest Coderdojo."
-				});
-			}
+					if (event.message.text === "miasta") {
+						sendMessage(event.sender.id, {
+							text: "Wpisz (w nastepnej wiadomosci) nazwe dowolego miasta, w ktorym jest Coderdojo."
+						});
+					} else {
+						sendMessage(event.sender.id, {
+							text: "Wpisz (w nastepnej wiadomosci) nazwe dowolego miasta, w ktorym jest Coderdojoasdasd."
+						});
 
-			for (var i = 0; i < cities.length; i++) {
-				if (event.message.text === cities[i]) {
-					sendMessage(event.sender.id, {
-						text: "Wybrano miasto: " + cities[i] + ", strona internetowa tego Coderdojo to: " + cities[i] +
-							".coderdojo.org.pl"
-					});
+						for (var i = 0; i < cities.length; i++) {
+							if (event.message.text === cities[i]) {
+								sendMessage(event.sender.id, {
+									text: "Wybrano miasto: " + cities[i] + ", strona internetowa tego Coderdojo to: " + cities[i] +
+										".coderdojo.org.pl"
+								});
+							}
+						}
+					}
 				}
-			}
-		}
-	}
-	res.sendStatus(200);
-});
+				res.sendStatus(200);
+			});
 
-// generic function sending messagesp-------------------------------------------------------------------------------------------------------
-function sendMessage(recipientId, message) {
-	request({
-		url: 'https://graph.facebook.com/v2.6/me/messages',
-		qs: {
-			access_token: process.env.PAGE_ACCESS_TOKEN
-		},
-		method: 'POST',
-		json: {
-			recipient: {
-				id: recipientId
-			},
-			message: message,
-		}
-	}, function(error, response, body) {
-		if (error) {
-			console.log('Error sending message: ', error);
-		} else if (response.body.error) {
-			console.log('Error: ', response.body.error);
-		}
-	});
-};
+		// generic function sending messagesp-------------------------------------------------------------------------------------------------------
+		function sendMessage(recipientId, message) {
+			request({
+				url: 'https://graph.facebook.com/v2.6/me/messages',
+				qs: {
+					access_token: process.env.PAGE_ACCESS_TOKEN
+				},
+				method: 'POST',
+				json: {
+					recipient: {
+						id: recipientId
+					},
+					message: message,
+				}
+			}, function(error, response, body) {
+				if (error) {
+					console.log('Error sending message: ', error);
+				} else if (response.body.error) {
+					console.log('Error: ', response.body.error);
+				}
+			});
+		};

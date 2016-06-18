@@ -27,7 +27,6 @@ app.get('/webhook', function(req, res) {
 app.post('/webhook', function(req, res) {
 	var events = req.body.entry[0].messaging;
 	var cities = ["Warszawa", "Cieszyn", "Cisie", "Zambrow", "Bialystok", "Gdansk", "Gliwice"];
-	var messagesSplit = event.message.text.split(" ");
 	for (i = 0; i < events.length; i++) {
 		var event = events[i];
 		if (event.message && event.message.text) {
@@ -49,10 +48,10 @@ app.post('/webhook', function(req, res) {
 				};
 
 
-			} else if (messagesSplit[0] === "!info") {
+			} else if (event.message.text.split(" ")[0] === "!info") {
 
-				for (var z = 0; z < messagesSplit.length; z++) {
-					if (messagesSplit[1] === cities[z]) {
+				for (var z = 0; z < cities.length; z++) {
+					if (event.message.text.split(" ")[1] === cities[z]) {
 						sendMessage(event.sender.id, {
 							text: "W: " + cities[z] + " nie ma dzis zajec"
 						});

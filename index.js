@@ -23,9 +23,10 @@ app.get('/webhook', function(req, res) {
 	}
 });
 
-// handler receiving messages
+// handler receiving messages---------------------------------------------------------------------------------------------------------
 app.post('/webhook', function(req, res) {
 	var events = req.body.entry[0].messaging;
+	var czas = new Date();
 	for (i = 0; i < events.length; i++) {
 		var event = events[i];
 		if (event.message && event.message.text) {
@@ -35,7 +36,7 @@ app.post('/webhook', function(req, res) {
 			}else if(event.message.text === "!time")
 			{
 				
-					sendMessage(event.sender.id, { text: "Jest godzina"});
+					sendMessage(event.sender.id, { text: "Jest godzina " + czas.getDay()});
 			
 			}else{
 					sendMessage(event.sender.id, {
@@ -49,7 +50,7 @@ app.post('/webhook', function(req, res) {
 	res.sendStatus(200);
 });
 
-// generic function sending messages
+// generic function sending messagesp-------------------------------------------------------------------------------------------------------
 function sendMessage(recipientId, message) {
 	request({
 		url: 'https://graph.facebook.com/v2.6/me/messages',

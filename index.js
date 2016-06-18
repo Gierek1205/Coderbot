@@ -30,21 +30,27 @@ app.post('/webhook', function(req, res) {
 	for (i = 0; i < events.length; i++) {
 		var event = events[i];
 		if (event.message && event.message.text) {
-			
-			if(event.message.text === "!help"){
-				sendMessage(event.sender.id, { text: "!pogoda, !time, itp.. itd..."});
-			}else if(event.message.text === "!time")
-			{
-				
-					sendMessage(event.sender.id, { text: "Jest godzina " + (czas.getHours()+2) + ":" + czas.getMinutes()});
-			
-			}else{
-					sendMessage(event.sender.id, {
-						text: "Maciek: " + event.message.text
-					});
-					sendMessage(event.sender.id, {
-						text: "Jesli nie wiesz co zrobic wpisz !help"});
+
+			if (event.message.text === "!help") {
+				sendMessage(event.sender.id, {
+					text: "!pogoda, !time, itp.. itd..."
+				});
+			} else if (event.message.text === "!time") {
+				if (czas.getMinutes() < 10) {
+					"0" + czas.getMinutes();
 				}
+				sendMessage(event.sender.id, {
+					text: "Jest godzina " + (czas.getHours() + 2) + ":" + czas.getMinutes()
+				});
+
+			} else {
+				sendMessage(event.sender.id, {
+					text: "Maciek: " + event.message.text
+				});
+				sendMessage(event.sender.id, {
+					text: "Jesli nie wiesz co zrobic wpisz !help"
+				});
+			}
 		}
 	}
 	res.sendStatus(200);

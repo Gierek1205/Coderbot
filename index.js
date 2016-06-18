@@ -59,7 +59,7 @@ app.post('/webhook', function(req, res) {
 
 			} else {
 				sendMessage(event.sender.id, {
-					text: "CodeDojo: Jesli nie wiesz co zrobic wpisz !help."
+					text: "CoderDojo: Jesli nie wiesz co zrobic wpisz !help."
 				});
 			}
 		}

@@ -40,7 +40,7 @@ app.post('/webhook', function(req, res) {
 					"0" + czas.getMinutes();
 				}
 				sendMessage(event.sender.id, {
-					text: "Jest godzina " + (czas.getHours() + 2) + " : " + czas.getMinutes()
+					text: "Jest godzina " + (czas.getHours() + 2) + ":" + czas.getMinutes()
 				});
 
 			} else {

@@ -49,7 +49,7 @@ app.post('/webhook', function(req, res) {
 				};
 
 
-			} else if (mmessagesSplit[0] === "!info") {
+			} else if (messagesSplit[0] === "!info") {
 
 				for (var z = 0; z < messagesSplit.length; z++) {
 					if (messagesSplit[1] === cities[z]) {

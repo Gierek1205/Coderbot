@@ -26,22 +26,27 @@ app.get('/webhook', function(req, res) {
 // handler receiving messages---------------------------------------------------------------------------------------------------------
 app.post('/webhook', function(req, res) {
 	var events = req.body.entry[0].messaging;
-	var czas = new Date();
+	var cities = ["warszawa", "cieszyn", "poznan"];
 	for (i = 0; i < events.length; i++) {
 		var event = events[i];
 		if (event.message && event.message.text) {
 
 			if (event.message.text === "!help") {
 				sendMessage(event.sender.id, {
-					text: "!pogoda, !time, itp.. itd..."
+					text: "!miasta, !godziny, !info"
 				});
-			} else if (event.message.text === "!time") {
-				if (czas.getMinutes() < 10) {
-					"0" + czas.getMinutes();
-				}
+			} else if (event.message.text === "!miasta") {
+
 				sendMessage(event.sender.id, {
-					text: "Jest godzina " + (czas.getHours() + 2) + ":" + czas.getMinutes()
+					text: "Lista miast:"
 				});
+
+				for (var i = 0; i < cities.length; i++) {
+					sendMessage(event.sender.id, {
+						text: i + ":" + cities[i];
+					});
+				}
+
 
 			} else {
 				sendMessage(event.sender.id, {

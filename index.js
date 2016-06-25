@@ -36,9 +36,9 @@ app.post('/webhook', function(req, res) {
 		if (event.message && event.message.text) {
 
 			if (event.message.text === "!help") {
-				app.push(event.message.text);
+				
 				sendMessage(event.sender.id, {
-					text: "!miasta, \n!godziny, \n!info <miasto>, \n!edit <miasto>" + "\n" + "Zapraszamy do odwiedzenia naszej strony internetowej www.coderdojo.org.pl"
+					text: "!miasta, !godziny, !info <miasto>, !edit <miasto>" + "\n" + "Zapraszamy do odwiedzenia naszej strony internetowej www.coderdojo.org.pl"
 				});
 			} else if (event.message.text === "!miasta") {
 
@@ -66,7 +66,7 @@ app.post('/webhook', function(req, res) {
 			} else if (event.message.text === "!whoami") {
 
 				sendMessage(event.sender.id, {
-					text: event.sender.id + "\nprosimy nie używać .NOT"
+					text: event.sender.id + " prosimy nie używać .NOT"
 				});
 
 			} else if (event.message.text.split('"')[0] === "!edit ") {
@@ -91,7 +91,7 @@ app.post('/webhook', function(req, res) {
 
 			} else {
 				sendMessage(event.sender.id, {
-					text: "Jesli nie wiesz co zrobic wpisz !help."
+					text: " .Jesli nie wiesz co zrobic wpisz !help."
 				});
 			}
 		}

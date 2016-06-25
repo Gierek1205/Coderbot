@@ -33,10 +33,10 @@ app.post('/webhook', function(req, res) {
 		if (event.message && event.message.text) {
 
 			if (event.message.text === "!help") {
-				sendMessage(event.sender.id, {
-					text: "!miasta, !godziny, !info <miasto>" + "\n" + "Zapraszamy do odwiedzenia naszej strony internetowej www.coderdojo.org.pl"
-				});
 				asd.push(event.message.text);
+				sendMessage(event.sender.id, {
+					text: "!miasta, !godziny, !info <miasto>" + "\n" + "Zapraszamy do odwiedzenia naszej strony internetowej www.coderdojo.org.pl " + asd
+				});
 			} else if (event.message.text === "!miasta") {
 
 				sendMessage(event.sender.id, {

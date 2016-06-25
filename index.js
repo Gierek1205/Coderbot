@@ -60,7 +60,7 @@ app.post('/webhook', function(req, res) {
 			} else if (event.message.text === "!whoami") {
 
 				sendMessage(event.sender.id, {
-					text: event.sender.id + " prosimy nie używać .NOT"
+					text: event.sender.id
 				});
 
 			} else if (event.message.text.split('"')[0] === "!edit ") {

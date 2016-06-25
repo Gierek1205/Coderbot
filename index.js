@@ -90,7 +90,7 @@ app.post('/webhook', function(req, res) {
 
 			} else {
 				sendMessage(event.sender.id, {
-					text: " .Jesli nie wiesz co zrobic wpisz !help."
+					text: "Jesli nie wiesz co zrobic wpisz !help."
 				});
 			}
 		}

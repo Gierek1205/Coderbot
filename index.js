@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
 var app = express();
-//var cieszynInfo = "To jest test";
+var cieszynInfo = "To jest test";
 // newsletter var cieszynEdit = [];
 
 app.use(bodyParser.urlencoded({
@@ -68,6 +68,12 @@ app.post('/webhook', function(req, res) {
 
 				sendMessage(event.sender.id, {
 					text: event.sender.id
+				});
+
+			} else if(event.message.text.split('"')[0] === "!edit "){
+
+				sendMessage(event.sender.id, {
+					text: "Cos tu jest ale jeszcze nie dziala..."
 				});
 
 			} else {

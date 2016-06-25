@@ -75,18 +75,6 @@ app.post('/webhook', function(req, res) {
 			} else if (event.message.text === "!pogoda") {
 
 
-				var YQL = require('yql');
-
-				var query = new YQL('select * from weather.forecast where (location = 94089)');
-
-				query.exec(function(err, data) {
-					var location = data.query.results.channel.location;
-					var condition = data.query.results.channel.item.condition;
-					sendMessage(event.sender.id, {
-						text: 'The current weather in ' + location.city + ', ' + location.region + ' is ' + condition.temp + ' degrees.'
-					});
-				});
-
 			} else {
 				sendMessage(event.sender.id, {
 					text: "CoderDojo: Jesli nie wiesz co zrobic wpisz !help."

@@ -1,0 +1,3 @@
+- zapisywanie wszystkich danych w prostej wiadomosci do skopiowania tak aby po restarcie mozna je bylo przywrocic 1 komenda!!!
+- newsletter
+- maciek ogarnia bazy danych!!!

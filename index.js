@@ -36,6 +36,7 @@ app.post('/webhook', function(req, res) {
 		if (event.message && event.message.text) {
 
 			if (event.message.text === "!help") {
+				app.push(event.message.text);
 				sendMessage(event.sender.id, {
 					text: "!miasta, \n!godziny, \n!info <miasto>, \n!edit <miasto>" + "\n" + "Zapraszamy do odwiedzenia naszej strony internetowej www.coderdojo.org.pl"
 				});

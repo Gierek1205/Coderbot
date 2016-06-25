@@ -52,7 +52,7 @@ app.post('/webhook', function(req, res) {
 				for (var z = 0; z < cities.length; z++) {
 					if (event.message.text.split(" ")[1].toLowerCase() === cities[z].toLowerCase()) {
 						sendMessage(event.sender.id, {
-							text: "W: " + cities[z] + " są dzisiaj zajęcia." +
+							text: "W: " + cities[z] + " są dzisiaj zajęcia."
 						});
 
 					}

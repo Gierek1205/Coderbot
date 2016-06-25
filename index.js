@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
 var app = express();
-var cieszynInfo = "To jest test";
+//var cieszynInfo = "To jest test";
 // newsletter var cieszynEdit = [];
 
 app.use(bodyParser.urlencoded({
@@ -63,7 +63,8 @@ app.post('/webhook', function(req, res) {
 					text: event.sender.id
 				});
 
-			} else if (event.message.text.split('"')[0] === "!edit ") {
+			} /*
+			else if (event.message.text.split('"')[0] === "!edit ") {
 
 
 
@@ -83,7 +84,8 @@ app.post('/webhook', function(req, res) {
 					text: event.sender.id + " prosimy nie używać .NOT"
 				});
 
-			} else {
+			} */
+			 else {
 				sendMessage(event.sender.id, {
 					text: "Jesli nie wiesz co zrobic wpisz !help." + event.message.text
 				});

@@ -48,16 +48,18 @@ app.post('/webhook', function(req, res) {
 				});
 
 			} else if (event.message.text.split(" ")[0] === "!info") {
-
+					var end = 0;
 				for (var z = 0; z < cities.length; z++) {
-					if (event.message.text.split(" ")[1].toLowerCase() == cities[z].toLowerCase()) {
+					if (event.message.text.toLowerCase().split(" ")[1] == cities[z].toLowerCase()) {
 						sendMessage(event.sender.id, {
 							text: cieszynInfo
 							});
-
+							end++;
 						}
 					}
 
+					
+					
 			} else if (event.message.text === "!whoami") {
 
 				sendMessage(event.sender.id, {

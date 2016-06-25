@@ -76,7 +76,7 @@ app.get('/webhook', function(req, res) {
 	
 	res.sendStatus(200);
 }
-}
+};
 
 // generic function sending messagesp-------------------------------------------------------------------------------------------------------
 function sendMessage(recipientId, message) {

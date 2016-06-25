@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var request = require('request');
 var app = express();
 var cieszynInfo = "To jest test";
+var miastaInfo = [];
 // newsletter var cieszynEdit = [];
 
 app.use(bodyParser.urlencoded({
@@ -77,11 +78,15 @@ app.post('/webhook', function(req, res) {
 				});
 
 
-			}else if(event.message.text.split(" \"")[0] === "!edit "){
+			}else if(event.message.text.split(" ")[0] === "!edit"){
+				for (var z = 0; z < cities.length; z++) {
+							if (event.message.text.toLowerCase().split('"')[1] == cities[z].toLowerCase()) {
 
-				sendMessage(event.sender.id, {
-					text: "Cos tu jest ale jeszcze nie dziala..."
-				});
+								sendMessage(event.sender.id, {	text: cities[z] + ": \n" + miastaInfo[z] + "\n zmienione na: \n" + event.message.text.split('"')[3] });
+
+								miastaInfo[z] = event.message.text.split('"')[3]
+							}
+						}
 
 			} else {
 				sendMessage(event.sender.id, {

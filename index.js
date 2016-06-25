@@ -58,8 +58,12 @@ app.post('/webhook', function(req, res) {
 						}
 					}
 
-					
-					
+					if(end === 0){
+							sendMessage(event.sender.id, {
+								text: "Błąd, wpisz: !info <miasto>"
+							});					
+						}
+
 			} else if (event.message.text === "!whoami") {
 
 				sendMessage(event.sender.id, {

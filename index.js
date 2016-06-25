@@ -82,10 +82,9 @@ app.post('/webhook', function(req, res) {
 				query.exec(function(err, data) {
 					var location = data.query.results.channel.location;
 					var condition = data.query.results.channel.item.condition;
-				});
-
-				sendMessage(event.sender.id, {
-					text: 'The current weather in ' + location.city + ', ' + location.region + ' is ' + condition.temp + ' degrees.'
+					sendMessage(event.sender.id, {
+						text: 'The current weather in ' + location.city + ', ' + location.region + ' is ' + condition.temp + ' degrees.'
+					});
 				});
 
 			} else {

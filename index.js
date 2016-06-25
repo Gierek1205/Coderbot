@@ -2,9 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
 var app = express();
-var franekId = 983172028462771,
-	maciekId = 1407458155946819,
-	cieszynInfo = "To jest test";
+var cieszynInfo = "To jest test";
 // newsletter var cieszynEdit = [];
 
 app.use(bodyParser.urlencoded({
@@ -43,13 +41,9 @@ app.post('/webhook', function(req, res) {
 			} else if (event.message.text === "!miasta") {
 
 				sendMessage(event.sender.id, {
-					text: "Lista miast w których znajduje się CoderDojo:"
+					text: "Lista miast w których znajduje się CoderDojo: " + "\n" +
+					"Warszawa" + "\n" + "Cieszyn" + "\n" + "Cisie" + "\n" + "Zambrów" + "\n" + "Białystok" + "\n" + "Gdańsk" + "\n" + "Gliwice" + "\n" + "Poznań"
 				});
-				setTimeout(function() {}, 3000);
-				for (var i = 0; i < cities.length; i++) {
-					sendMessage(event.sender.id, {
-						text: cities[i]
-					});
 				};
 
 			} else if (event.message.text.split(" ")[0] === "!info") {
@@ -73,7 +67,7 @@ app.post('/webhook', function(req, res) {
 
 
 
-				if (event.sender.id == franekId || event.sender.id == maciekId) {
+				if (event.sender.id == 983172028462771 || event.sender.id == 1407458155946819) {
 
 					var cieszynInfoCopy = cieszynInfo;
 
@@ -91,7 +85,7 @@ app.post('/webhook', function(req, res) {
 
 			} else {
 				sendMessage(event.sender.id, {
-					text: " .Jesli nie wiesz co zrobic wpisz !help."
+					text: "Jesli nie wiesz co zrobic wpisz !help." + event.message.text
 				});
 			}
 		}

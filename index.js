@@ -22,21 +22,6 @@ app.get('/webhook', function(req, res) {
 		res.send('Invalid verify token');
 	}
 });
-/*
-
-			Maciek:
-			- json
-			- pogoda 
-			- 
-				
-
-		
-			Franek:
-			rozplanuje schemat
-
-
-
-*/
 
 // handler receiving messages---------------------------------------------------------------------------------------------------------
 app.post('/webhook', function(req, res) {
@@ -72,12 +57,15 @@ app.post('/webhook', function(req, res) {
 					}
 				}
 
-			} else if (event.message.text === "!pogoda") {
+			} else if (event.message.text === "!whoami") {
 
+				sendMessage(event.sender.id, {
+					text: event.sender.id
+				});
 
 			} else {
 				sendMessage(event.sender.id, {
-					text: "CoderDojo: Jesli nie wiesz co zrobic wpisz !help."
+					text: " .Jesli nie wiesz co zrobic wpisz !help."
 				});
 			}
 		}

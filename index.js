@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
 var app = express();
+var asd = [];
 
 app.use(bodyParser.urlencoded({
 	extended: false
@@ -33,8 +34,9 @@ app.post('/webhook', function(req, res) {
 
 			if (event.message.text === "!help") {
 				sendMessage(event.sender.id, {
-					text: "!miasta, !godziny, !info <miasto>" + "\n" + " Zapraszamy do odwiedzenia naszej strony internetowej www.coderdojo.org.pl"
+					text: "!miasta, !godziny, !info <miasto>" + "\n" + "Zapraszamy do odwiedzenia naszej strony internetowej www.coderdojo.org.pl"
 				});
+				asd.push(event.message.text);
 			} else if (event.message.text === "!miasta") {
 
 				sendMessage(event.sender.id, {

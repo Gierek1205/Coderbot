@@ -53,7 +53,7 @@ app.post('/webhook', function(req, res) {
 				for (var z = 0; z < cities.length; z++) {
 					if (event.message.text.toLowerCase().split(" ")[1] == cities[z].toLowerCase()) {
 						sendMessage(event.sender.id, {
-							text: cieszynInfo
+							text: miastaInfo[z]
 							});
 							end++;
 						}

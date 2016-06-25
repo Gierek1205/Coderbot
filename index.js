@@ -68,7 +68,7 @@ app.post('/webhook', function(req, res) {
 					text: event.sender.id + " prosimy nie używać .NOT"
 				});
 
-			} else if (event.message.text.split(" ")[0] === "!edit") {
+			} else if (event.message.text.split('"')[0] === "!edit ") {
 
 
 
@@ -76,7 +76,7 @@ app.post('/webhook', function(req, res) {
 
 					var cieszynInfoCopy = cieszynInfo;
 
-					cieszynInfo = event.message.text.split(" ")[1];
+					cieszynInfo = event.message.text.split('"')[1];
 
 					sendMessage(event.sender.id, {
 						text: "Aktualna wartość zmiennej: " + cieszynInfoCopy + "\n" + "Zmieniono na: " + cieszynInfo

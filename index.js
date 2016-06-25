@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 var request = require('request');
 var app = express();
 var cieszynInfo = "To jest test";
-var miastaInfo = [];
+var miastaInfo = ["Warszawa", "Cieszyn", "Cisie", "Zambrów", "Białystok", "Gdańsk", "Gliwice", "Poznań"];
 // newsletter var cieszynEdit = [];
 
 app.use(bodyParser.urlencoded({

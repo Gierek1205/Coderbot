@@ -2,7 +2,9 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
 var app = express();
-var asd = [];
+var franekId = 983172028462771;
+var cieszynInfo = "To jest test";
+// newsletter var cieszynEdit = [];
 
 app.use(bodyParser.urlencoded({
 	extended: false
@@ -35,7 +37,7 @@ app.post('/webhook', function(req, res) {
 			if (event.message.text === "!help") {
 				asd.push(event.message.text);
 				sendMessage(event.sender.id, {
-					text: "!miasta, !godziny, !info <miasto>" + "\n" + "Zapraszamy do odwiedzenia naszej strony internetowej www.coderdojo.org.pl " + asd
+					text: "!miasta, !godziny, !info <miasto>" + "\n" + "Zapraszamy do odwiedzenia naszej strony internetowej www.coderdojo.org.pl"
 				});
 			} else if (event.message.text === "!miasta") {
 
@@ -61,6 +63,26 @@ app.post('/webhook', function(req, res) {
 				}
 
 			} else if (event.message.text === "!whoami") {
+
+				sendMessage(event.sender.id, {
+					text: event.sender.id + " prosimy nie używać .NOT"
+				});
+
+			} else if (event.message.text.split(" ")[0] === "!edit") {
+
+
+
+				if (event.sender.id == franekId) {
+
+					var cieszynInfoCopy = cieszynInfo;
+
+					cieszynInfo = event.message.text.split(" ")[1];
+
+					sendMessage(event.sender.id, {
+						text: "Aktualna wartość zmiennej: " + cieszynInfoCopy + "\n" + "Zmieniono na: " + cieszynInfo
+					});
+
+				}
 
 				sendMessage(event.sender.id, {
 					text: event.sender.id + " prosimy nie używać .NOT"

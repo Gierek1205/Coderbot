@@ -33,13 +33,18 @@ app.post('/webhook', function(req, res) {
 		var event = events[i];
 		if (event.message && event.message.text) {
 
-			if (event.message.text === "!help") {
-				
-				sendMessage(event.sender.id, {
-					text: "!miasta, !godziny, !info <miasto>, !edit <miasto>" + "\n" + "Zapraszamy do odwiedzenia naszej strony internetowej www.coderdojo.org.pl"
-				});
 
-			} else if (event.message.text === "!miasta") {
+			switch(event.message.text.split(" ")){
+
+				case "!help":
+					{
+						sendMessage(event.sender.id, {
+							text: "!miasta, !godziny, !info <miasto>, !edit <miasto>" + "\n" + "Zapraszamy do odwiedzenia naszej strony internetowej www.coderdojo.org.pl"
+						});
+					}
+			}
+
+			if (event.message.text === "!miasta") {
 
 				sendMessage(event.sender.id, {
 					text: "Lista miast w których znajduje się CoderDojo: " + "\n" +

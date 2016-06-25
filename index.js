@@ -34,27 +34,29 @@ app.post('/webhook', function(req, res) {
 		if (event.message && event.message.text) {
 
 
-			if(event.message.text.split(" ") === "!help"){
+			if(event.message.text === "!help"){
 
 						sendMessage(event.sender.id, {
 							text: "!miasta, !godziny, !info <miasto>, !edit <miasto>" + "\n" + "Zapraszamy do odwiedzenia naszej strony internetowej www.coderdojo.org.pl"
 						});
+
 			} else if (event.message.text === "!miasta") {
 
 				sendMessage(event.sender.id, {
 					text: "Lista miast w których znajduje się CoderDojo: " + "\n" +
 					"Warszawa" + "\n" + "Cieszyn" + "\n" + "Cisie" + "\n" + "Zambrów" + "\n" + "Białystok" + "\n" + "Gdańsk" + "\n" + "Gliwice" + "\n" + "Poznań"
 				});
-				}else if (event.message.text.split(" ")[0] === "!info") {
+
+			} else if (event.message.text.split(" ")[0] === "!info") {
 
 				for (var z = 0; z < cities.length; z++) {
 					if (event.message.text.split(" ")[1].toLowerCase() == cities[z].toLowerCase()) {
 						sendMessage(event.sender.id, {
 							text: cieszynInfo
-						});
+							});
 
+						}
 					}
-				}
 
 			} else if (event.message.text === "!whoami") {
 

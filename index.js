@@ -70,7 +70,14 @@ app.post('/webhook', function(req, res) {
 					text: event.sender.id
 				});
 
-			} else if(event.message.text.split('"')[0] === "!edit "){
+			} else if(event.message.text === "!edit"){
+
+				sendMessage(event.sender.id, {
+					text: "Prawidłowe użycie: !edit \"<miasto>\" \"<tresc wiadomosci>\""
+				});
+
+
+			}else if(event.message.text.split(" \"")[0] === "!edit "){
 
 				sendMessage(event.sender.id, {
 					text: "Cos tu jest ale jeszcze nie dziala..."

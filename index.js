@@ -2,8 +2,9 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
 var app = express();
-var franekId = 983172028462771;
-var cieszynInfo = "To jest test";
+var franekId = 983172028462771,
+	maciekId = 1407458155946819,
+	cieszynInfo = "To jest test";
 // newsletter var cieszynEdit = [];
 
 app.use(bodyParser.urlencoded({
@@ -72,7 +73,7 @@ app.post('/webhook', function(req, res) {
 
 
 
-				if (event.sender.id == franekId) {
+				if (event.sender.id == franekId || event.sender.id == maciekId) {
 
 					var cieszynInfoCopy = cieszynInfo;
 

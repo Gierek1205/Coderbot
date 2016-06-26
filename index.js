@@ -55,7 +55,7 @@ app.post('/webhook', function(req, res) {
 				} else if(event.message.text === "!pokaz") // 				<<<----- wyswietlanie z bazy danych!!
 				{
 							sendMessage(event.sender.id, {
-							text: "ID: \n" + "MACIEK_ID: " + MACIEK_ID + "\nFRANEK_ID: " + FRANEK_ID
+							text: "ID: \n" + "MACIEK_ID: " + process.env.MACIEK_ID + "\nFRANEK_ID: " + process.env.FRANEK_ID
 						});
 
 				} else if (event.message.text === "!miasta") {

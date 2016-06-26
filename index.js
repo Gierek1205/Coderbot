@@ -7,7 +7,7 @@ var miastaInfo = ["Warszawa", "Cieszyn", "Cisie", "Zambrów", "Białystok", "Gda
 // newsletter var cieszynEdit = [];
 
 // DATABASE init
-storage.initSync();
+
 
 app.use(bodyParser.urlencoded({
 	extended: false
@@ -46,16 +46,16 @@ app.post('/webhook', function(req, res) {
 
 			} else if(event.message.text.split(" ")[0] === "!ustaw"){
 
-						storage.setItem( '1' ,event.message.text.split(" ")[1]);
+						//tutaj dodawanie do bazy danych!!!
 
 						sendMessage(event.sender.id, {
-							text: "Udalo ci sie ustawic zmienna na: " + storage.getItem('1');
+							text: "Udalo ci sie ustawic zmienna na: " + "tutaj zmienna";
 						});
 
-				} else if(event.message.text === "!pokaz")
+				} else if(event.message.text === "!pokaz") // 				<<<----- wyswietlanie z bazy danych!!
 				{
 							sendMessage(event.sender.id, {
-							text: "Zmienna ma wartosc: " + storage.getItem('1');
+							text: "Zmienna ma wartosc: " + "tutaj zmienna";
 						});
 
 				}else if (event.message.text === "!miasta") {

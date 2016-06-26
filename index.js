@@ -48,14 +48,17 @@ app.post('/webhook', function(req, res) {
 
 						//tutaj dodawanie do bazy danych!!!
 
+						process.env.CIESZYN_INFO = event.message.text.split(" ")[1];
+
 						sendMessage(event.sender.id, {
-							text: "Udalo ci sie ustawic zmienna na: " + "tutaj zmienna"
+							text: "Udalo ci sie ustawic zmienna na: " + process.env.CIESZYN_INFO
 						});
 
 				} else if(event.message.text === "!pokaz") // 				<<<----- wyswietlanie z bazy danych!!
 				{
 							sendMessage(event.sender.id, {
-							text: "ID: \n" + "MACIEK_ID: " + process.env.MACIEK_ID + "\nFRANEK_ID: " + process.env.FRANEK_ID
+							text: "ID: \n" + "MACIEK_ID: " + process.env.MACIEK_ID + "\nFRANEK_ID: " + process.env.FRANEK_ID +
+							"\nCIESZYN_INFO: " + process.env.CIESZYN_INFO
 						});
 
 				} else if (event.message.text === "!miasta") {

@@ -6,6 +6,9 @@ var cieszynInfo = "To jest test";
 var miastaInfo = ["Warszawa", "Cieszyn", "Cisie", "Zambrów", "Białystok", "Gdańsk", "Gliwice", "Poznań"];
 // newsletter var cieszynEdit = [];
 
+// DATABASE init
+storage.initSync();
+
 app.use(bodyParser.urlencoded({
 	extended: false
 }));
@@ -38,10 +41,24 @@ app.post('/webhook', function(req, res) {
 			if(event.message.text === "!help"){
 
 						sendMessage(event.sender.id, {
-							text: "!miasta, !godziny, !info <miasto>, !edit <miasto>" + "\n" + "Zapraszamy do odwiedzenia naszej strony internetowej www.coderdojo.org.pl"
+							text: "!miasta, !godziny, !info <miasto>, !edit <miasto> \n !ustaw <wartosc do zapisania> \n !pokaz" + "\n" + "Zapraszamy do odwiedzenia naszej strony internetowej www.coderdojo.org.pl"
 						});
 
-			} else if (event.message.text === "!miasta") {
+			} else if(event.message.text.split(" ")[0] === "!ustaw"){
+
+						storage.setItem( '1' ,event.message.text.split(" ")[1]);
+
+						sendMessage(event.sender.id, {
+							text: "Udalo ci sie ustawic zmienna na: " + storage.getItem('1');
+						});
+
+				} else if(event.message.text === "!pokaz")
+				{
+							sendMessage(event.sender.id, {
+							text: "Zmienna ma wartosc: " + storage.getItem('1');
+						});
+
+				}else if (event.message.text === "!miasta") {
 
 				sendMessage(event.sender.id, {
 					text: "Lista miast w których znajduje się CoderDojo: " + "\n" +

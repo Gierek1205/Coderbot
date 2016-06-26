@@ -6,7 +6,6 @@ var cieszynInfo = "To jest test";
 var miastaInfo = ["Warszawa", "Cieszyn", "Cisie", "Zambrów", "Białystok", "Gdańsk", "Gliwice", "Poznań"];
 // newsletter var cieszynEdit = [];
 
-// DATABASE init
 
 
 app.use(bodyParser.urlencoded({
@@ -41,7 +40,8 @@ app.post('/webhook', function(req, res) {
 			if(event.message.text === "!help"){
 
 						sendMessage(event.sender.id, {
-							text: "!miasta, !godziny, !info <miasto>, !edit <miasto> \n !ustaw <wartosc do zapisania> \n !pokaz" + "\n" + "Zapraszamy do odwiedzenia naszej strony internetowej www.coderdojo.org.pl"
+							text: "!miasta, !godziny, !info <miasto>, !edit <miasto> \n !ustaw <wartosc do zapisania> \n !pokaz" +
+							 "\n" + "Zapraszamy do odwiedzenia naszej strony internetowej www.coderdojo.org.pl"
 						});
 
 			} else if(event.message.text.split(" ")[0] === "!ustaw"){
@@ -49,16 +49,16 @@ app.post('/webhook', function(req, res) {
 						//tutaj dodawanie do bazy danych!!!
 
 						sendMessage(event.sender.id, {
-							text: "Udalo ci sie ustawic zmienna na: " + "tutaj zmienna";
+							text: "Udalo ci sie ustawic zmienna na: " + "tutaj zmienna"
 						});
 
 				} else if(event.message.text === "!pokaz") // 				<<<----- wyswietlanie z bazy danych!!
 				{
 							sendMessage(event.sender.id, {
-							text: "Zmienna ma wartosc: " + "tutaj zmienna";
+							text: "ID: \n" + "MACIEK_ID: " + MACIEK_ID + "\nFRANEK_ID: " + FRANEK_ID
 						});
 
-				}else if (event.message.text === "!miasta") {
+				} else if (event.message.text === "!miasta") {
 
 				sendMessage(event.sender.id, {
 					text: "Lista miast w których znajduje się CoderDojo: " + "\n" +

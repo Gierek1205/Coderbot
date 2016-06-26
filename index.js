@@ -99,7 +99,7 @@ app.post('/webhook', function(req, res) {
 				for (var z = 0; z < cities.length; z++) {
 							if (event.message.text.toLowerCase().split('"')[1] == cities[z].toLowerCase()) {
 
-								sendMessage(event.sender.id, {	text: cities[z] + ": \n" + miastaInfo[z] + "\n zmienione na: \n" + event.message.text.split('"')[3] });
+								sendMessage(event.sender.id, {	text: cities[z] + ": \n" + miastaInfo[z] + "\n    zmienione na: \n" + event.message.text.split('"')[3] });
 
 								miastaInfo[z] = event.message.text.split('"')[3]
 							}

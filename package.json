@@ -9,8 +9,7 @@
   },
   "author": "Franek Matusiak",
   "license": "ISC",
-  "dependencies": {
-	"node-persist": 
+  "dependencies": { 
     "body-parser": "^1.15.0",
     "express": "^4.13.4",
     "moment": "^2.13.0",

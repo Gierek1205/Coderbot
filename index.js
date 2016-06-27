@@ -65,7 +65,9 @@ app.post('/webhook', function(req, res) {
 						      console.log(err.message);
 						      return;
 						    }
-						    console.log('Configuration saved successfully.')
+						    sendMessage(event.sender.id, {
+							text: "Zapisałeś"
+						});
 						  });
 
 				} else if(event.message.text.split(" ")[0] === "!ustaw"){
@@ -98,11 +100,6 @@ app.post('/webhook', function(req, res) {
 							    console.log('There has been an error parsing your JSON.')
 							    console.log(err);
 							  }
-
-
-							sendMessage(event.sender.id, {
-							text: "ID: \n"
-						});
 
 				} else if (event.message.text === "!miasta") {
 

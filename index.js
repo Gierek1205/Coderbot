@@ -85,6 +85,25 @@ app.post('/webhook', function(req, res) {
 							"\nCIESZYN_INFO: " + process.env.CIESZYN_INFO
 						});
 
+								var data = fs.readFileSync('./config.json'),
+							      message;
+
+							  try {
+							    message = JSON.parse(data);
+							    sendMessage(event.sender.id, {
+							text: "Wiadomosc: \n" + message
+						});
+							  }
+							  catch (err) {
+							    console.log('There has been an error parsing your JSON.')
+							    console.log(err);
+							  }
+
+
+							sendMessage(event.sender.id, {
+							text: "ID: \n"
+						});
+
 				} else if (event.message.text === "!miasta") {
 
 				sendMessage(event.sender.id, {

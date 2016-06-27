@@ -1,10 +1,15 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
+var fs = require('fs');
+
 var app = express();
+
 var cieszynInfo = "To jest test";
 var miastaInfo = ["Warszawa", "Cieszyn", "Cisie", "Zambrów", "Białystok", "Gdańsk", "Gliwice", "Poznań"];
 // newsletter var cieszynEdit = [];
+  
+
 
 
 
@@ -44,7 +49,26 @@ app.post('/webhook', function(req, res) {
 							 "\n" + "Zapraszamy do odwiedzenia naszej strony internetowej www.coderdojo.org.pl"
 						});
 
-			} else if(event.message.text.split(" ")[0] === "!ustaw"){
+			} else if(event.message.text.split(" ")[0] === "!save"){
+
+						  var myOptions = {
+						    city: 'Cieszyn',
+						    message: event.message.text.split(" ")[1]
+						  };
+
+						  var data = JSON.stringify(myOptions);
+
+
+						fs.writeFile('./config.json', data, function (err) {
+						    if (err) {
+						      console.log('There has been an error saving your configuration data.');
+						      console.log(err.message);
+						      return;
+						    }
+						    console.log('Configuration saved successfully.')
+						  });
+
+				} else if(event.message.text.split(" ")[0] === "!ustaw"){
 
 						//tutaj dodawanie do bazy danych!!!
 

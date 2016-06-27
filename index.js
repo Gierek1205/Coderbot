@@ -86,12 +86,12 @@ app.post('/webhook', function(req, res) {
 						});
 
 								var data = fs.readFileSync('./config.json'),
-							      message;
+							      city;
 
 							  try {
-							    message = JSON.parse(data);
+							    city = JSON.parse(data);
 							    sendMessage(event.sender.id, {
-							text: "Wiadomosc: \n" + message
+							text: "Wiadomosc: \n" + city
 						});
 							  }
 							  catch (err) {

@@ -93,7 +93,7 @@ app.post('/webhook', function(req, res) {
 							  try {
 							    city = JSON.parse(data);
 							    sendMessage(event.sender.id, {
-							text: "Wiadomosc: \n" + city
+							text: "Wiadomosc: \n" + city.message
 						});
 							  }
 							  catch (err) {

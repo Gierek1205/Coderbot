@@ -66,7 +66,7 @@ app.post('/webhook', function(req, res) {
 						      return;
 						    }
 						    sendMessage(event.sender.id, {
-							text: "Zapisałeś"
+							text: "Zapisałeś!!"
 						});
 						  });
 

@@ -170,11 +170,10 @@ function ZapiszPlik(miasto, message) {
 		});
 
 
-	return 0;
 
 };
 
-/*
+/*  w */
 function ReadFile(miasto) {
 	//	var options = {
 	//		host: "www.coderdojo.cba.pl",
@@ -190,24 +189,46 @@ function ReadFile(miasto) {
 	//	});
 
 
+	/*
+		http = require('http')
 
-	http = require('http')
+		options =
+			host: "/index.php?pass=coderbot123&miasto=" + miasto + "&f=odczyt"
+		path: '/'
 
-	options =
-		host: "/index.php?pass=coderbot123&miasto=" + miasto + "&f=odczyt"
-	path: '/'
+		request = http.get options, (response) - >
+			console.log("Got response: " + response.statusCode)
+		console.log(response.headers)
+		console.dir(response)
+		response.on 'data', (chunk) - >
+			console.log('body: ' + chunk)
 
-	request = http.get options, (response) - >
-		console.log("Got response: " + response.statusCode)
-	console.log(response.headers)
-	console.dir(response)
-	response.on 'data', (chunk) - >
-		console.log('body: ' + chunk)
+		request.on 'error', (error) - >
+			console.log("Got error: " + error.message)
 
-	request.on 'error', (error) - >
-		console.log("Got error: " + error.message)
+	*/
 
 
 
-	return response;
+	var options = {
+		host: 'www.google.com',
+		port: 80,
+		path: '/index.php'
+	};
+
+	http.get(options, function(res) {
+		var body = '';
+		res.on('data', function(chunk) {
+			body += chunk;
+		});
+		res.on('end', function() {
+			console.log(body);
+		});
+	}).on('error', function(e) {
+		console.log("Got error: " + e.message);
+	});
+
+
+
+	return body;
 };

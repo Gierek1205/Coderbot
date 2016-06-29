@@ -169,10 +169,8 @@ function ZapiszPlik(miasto, message) {
 			console.log(body);
 		});
 
-	sendMessage(event.sender.id, {
-		text: "Jesli nie wiesz co " + event.message.text
-	});
 
+	return 0;
 
 };
 

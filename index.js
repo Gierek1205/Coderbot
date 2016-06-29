@@ -161,7 +161,7 @@ function sendMessage(recipientId, message) {
 function ZapiszPlik(miasto, message) {
 	var request = require("request");
 
-	request("http://www.coderbot.cba.pl/index.php?pass=coderbot123&miasto=" + miasto + "&tekst=" + message + "&t=0x01",
+	request("http://www.coderbot.cba.pl/index.php?pass=coderbot123&miasto=" + miasto + "&tekst=" + message + "&f=zapisz",
 		function(error, response, body) {
 			console.log(body);
 		});

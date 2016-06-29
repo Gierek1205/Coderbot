@@ -168,6 +168,12 @@ function ZapiszPlik(miasto, message) {
 		function(error, response, body) {
 			console.log(body);
 		});
+
+	sendMessage(event.sender.id, {
+		text: "Jesli nie wiesz co " + event.message.text
+	});
+
+
 };
 
 function ReadFile(miasto) {

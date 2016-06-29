@@ -8,8 +8,6 @@ var app = express();
 var cieszynInfo = "To jest test";
 var miastaInfo = ["Warszawa", "Cieszyn", "Cisie", "Zambrów", "Białystok", "Gdańsk", "Gliwice", "Poznań"];
 // newsletter var cieszynEdit = [];
-  
-
 
 
 
@@ -42,88 +40,87 @@ app.post('/webhook', function(req, res) {
 		if (event.message && event.message.text) {
 
 
-			if(event.message.text === "!help"){
+			if (event.message.text === "!help") {
 
-						sendMessage(event.sender.id, {
-							text: "!miasta, !godziny, !info <miasto>, !edit <miasto> \n !ustaw <wartosc do zapisania> \n !pokaz" +
-							 "\n" + "Zapraszamy do odwiedzenia naszej strony internetowej www.coderdojo.org.pl"
-						});
+				sendMessage(event.sender.id, {
+					text: "!miasta, !godziny, !info <miasto>, !edit <miasto> \n !ustaw <wartosc do zapisania> \n !pokaz" +
+						"\n" + "Zapraszamy do odwiedzenia naszej strony internetowej www.coderdojo.org.pl"
+				});
 
-			} else if(event.message.text.split(" ")[0] === "!save"){
+			} else if (event.message.text.split(" ")[0] === "!save") {
 
-						  var myOptions = {
-						    city: 'Cieszyn',
-						    message: event.message.text.split(" ")[1]
-						  };
+				var myOptions = {
+					city: 'Cieszyn',
+					message: event.message.text.split(" ")[1]
+				};
 
-						  var data = JSON.stringify(myOptions);
+				var data = JSON.stringify(myOptions);
 
 
-						fs.writeFile('./config.json', data, function (err) {
-						    if (err) {
-						      console.log('There has been an error saving your configuration data.');
-						      console.log(err.message);
-						      return;
-						    }
-						    sendMessage(event.sender.id, {
-							text: "Zapisałeś!!"
-						});
-						  });
+				fs.writeFile('./config.json', data, function(err) {
+					if (err) {
+						console.log('There has been an error saving your configuration data.');
+						console.log(err.message);
+						return;
+					}
+					sendMessage(event.sender.id, {
+						text: "Zapisałeś!!"
+					});
+				});
 
-				} else if(event.message.text.split(" ")[0] === "!ustaw"){
+			} else if (event.message.text.split(" ")[0] === "!ustaw") {
 
-						//tutaj dodawanie do bazy danych!!!
+				//tutaj dodawanie do bazy danych!!!
 
-						process.env.CIESZYN_INFO = event.message.text.split(" ")[1];
+				process.env.CIESZYN_INFO = event.message.text.split(" ")[1];
 
-						sendMessage(event.sender.id, {
-							text: "Udalo ci sie ustawic zmienna na: " + process.env.CIESZYN_INFO
-						});
+				sendMessage(event.sender.id, {
+					text: "Udalo ci sie ustawic zmienna na: " + process.env.CIESZYN_INFO
+				});
 
-				} else if(event.message.text === "!pokaz") // 				<<<----- wyswietlanie z bazy danych!!
-				{
-							sendMessage(event.sender.id, {
-							text: "ID: \n" + "MACIEK_ID: " + process.env.MACIEK_ID + "\nFRANEK_ID: " + process.env.FRANEK_ID +
-							"\nCIESZYN_INFO: " + process.env.CIESZYN_INFO
-						});
+			} else if (event.message.text === "!pokaz") // 				<<<----- wyswietlanie z bazy danych!!
+			{
+				sendMessage(event.sender.id, {
+					text: "ID: \n" + "MACIEK_ID: " + process.env.MACIEK_ID + "\nFRANEK_ID: " + process.env.FRANEK_ID +
+						"\nCIESZYN_INFO: " + process.env.CIESZYN_INFO
+				});
 
-								var data = fs.readFileSync('./config.json'),
-							      city;
+				var data = fs.readFileSync('./config.json'),
+					city;
 
-							  try {
-							    city = JSON.parse(data);
-							    sendMessage(event.sender.id, {
-							text: "Wiadomosc: \n" + city.message
-						});
-							  }
-							  catch (err) {
-							    console.log('There has been an error parsing your JSON.')
-							    console.log(err);
-							  }
+				try {
+					city = JSON.parse(data);
+					sendMessage(event.sender.id, {
+						text: "Wiadomosc: \n" + city.message
+					});
+				} catch (err) {
+					console.log('There has been an error parsing your JSON.')
+					console.log(err);
+				}
 
-				} else if (event.message.text === "!miasta") {
+			} else if (event.message.text.toLowerCase() === "miasta") {
 
 				sendMessage(event.sender.id, {
 					text: "Lista miast w których znajduje się CoderDojo: " + "\n" +
-					"Warszawa" + "\n" + "Cieszyn" + "\n" + "Cisie" + "\n" + "Zambrów" + "\n" + "Białystok" + "\n" + "Gdańsk" + "\n" + "Gliwice" + "\n" + "Poznań"
+						"Warszawa" + "\n" + "Cieszyn" + "\n" + "Cisie" + "\n" + "Zambrów" + "\n" + "Białystok" + "\n" + "Gdańsk" + "\n" + "Gliwice" + "\n" + "Poznań"
 				});
 
-			} else if (event.message.text.split(" ")[0] === "!info") {
-					var end = 0;
+			} else if (event.message.text.split(" ")[0].toLowerCase() === "info") {
+				var end = 0;
 				for (var z = 0; z < cities.length; z++) {
 					if (event.message.text.toLowerCase().split(" ")[1] == cities[z].toLowerCase()) {
 						sendMessage(event.sender.id, {
 							text: miastaInfo[z]
-							});
-							end++;
-						}
+						});
+						end++;
 					}
+				}
 
-					if(end === 0){
-							sendMessage(event.sender.id, {
-								text: "Błąd, wpisz: !info <miasto>"
-							});					
-						}
+				if (end === 0) {
+					sendMessage(event.sender.id, {
+						text: "Błąd, wpisz: !info <miasto>"
+					});
+				}
 
 			} else if (event.message.text === "!whoami") {
 
@@ -131,22 +128,24 @@ app.post('/webhook', function(req, res) {
 					text: event.sender.id
 				});
 
-			} else if(event.message.text === "!edit"){
+			} else if (event.message.text === "!edit") {
 
 				sendMessage(event.sender.id, {
 					text: "Prawidłowe użycie: !edit \"<miasto>\" \"<tresc wiadomosci>\""
 				});
 
 
-			}else if(event.message.text.split(" ")[0] === "!edit"){
+			} else if (event.message.text.split(" ")[0] === "!edit") {
 				for (var z = 0; z < cities.length; z++) {
-							if (event.message.text.toLowerCase().split('"')[1] == cities[z].toLowerCase()) {
+					if (event.message.text.toLowerCase().split('"')[1] == cities[z].toLowerCase()) {
 
-								sendMessage(event.sender.id, {	text: cities[z] + ": \n" + miastaInfo[z] + "\n    zmienione na: \n" + event.message.text.split('"')[3] });
+						sendMessage(event.sender.id, {
+							text: cities[z] + ": \n" + miastaInfo[z] + "\n    zmienione na: \n" + event.message.text.split('"')[3]
+						});
 
-								miastaInfo[z] = event.message.text.split('"')[3]
-							}
-						}
+						miastaInfo[z] = event.message.text.split('"')[3]
+					}
+				}
 
 			} else {
 				sendMessage(event.sender.id, {
@@ -154,9 +153,9 @@ app.post('/webhook', function(req, res) {
 				});
 			}
 		}
-	
-	res.sendStatus(200);
-}
+
+		res.sendStatus(200);
+	}
 });
 
 // generic function sending messagesp-------------------------------------------------------------------------------------------------------

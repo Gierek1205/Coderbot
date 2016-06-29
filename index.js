@@ -53,12 +53,12 @@ app.post('/webhook', function(req, res) {
 				var wiadomosc = event.message.text.split('"')[3];
 
 				ZapiszPlik(city, wiadomosc);
+				/*
+								sendMessage(event.sender.id, {
+									text: city + ": " + ReadFile(city)
+								});
 
-				sendMessage(event.sender.id, {
-					text: city + ": " + ReadFile(city)
-				});
-
-
+				*/
 			} else if (event.message.text.split(" ")[0] === "!ustaw") {
 
 				//tutaj dodawanie do bazy danych!!!
@@ -174,7 +174,7 @@ function ZapiszPlik(miasto, message) {
 
 };
 
-
+/*
 function ReadFile(miasto) {
 	//	var options = {
 	//		host: "www.coderdojo.cba.pl",

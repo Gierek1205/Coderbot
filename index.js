@@ -171,6 +171,6 @@ function ZapiszPlik(miasto, message) {
 };
 
 function ReadFile(miasto) {
-	var resp = http.get(text: "http://www.coderbot.cba.pl/index.php?pass=coderbot123&miasto=" + miasto + "&f=odczyt");
+	var resp = http.get("http://www.coderbot.cba.pl/index.php?pass=coderbot123&miasto=" + miasto + "&f=odczyt");
 	return resp;
 };

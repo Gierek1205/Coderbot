@@ -54,6 +54,9 @@ app.post('/webhook', function(req, res) {
 
 				ZapiszPlik(city, wiadomosc);
 
+				sendMessage(event.sender.id, {
+					text: city + ": " + ReadFile(city)
+				});
 
 
 			} else if (event.message.text.split(" ")[0] === "!ustaw") {
@@ -166,9 +169,8 @@ function ZapiszPlik(miasto, message) {
 			console.log(body);
 		});
 };
-/*
-function ReadFile(miasto) {
-	var resp = http.get(text: "http://www.coderbot.cba.pl/index.php?pass=coderbot123&miasto=" + miasto + "&t=0x00")
 
+function ReadFile(miasto) {
+	var resp = http.get(text: "http://www.coderbot.cba.pl/index.php?pass=coderbot123&miasto=" + miasto + "&f=odczyt")
+	return resp;
 };
-*/

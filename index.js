@@ -130,10 +130,10 @@ app.post('/webhook', function(req, res) {
 				text: "Jesli nie wiesz co zrobic wpisz !help.  " + event.message.text
 			});
 		}
-	}
 
-	res.sendStatus(200);
-}
+
+		res.sendStatus(200);
+	}
 });
 
 // generic function sending messagesp-------------------------------------------------------------------------------------------------------

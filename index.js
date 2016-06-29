@@ -176,18 +176,38 @@ function ZapiszPlik(miasto, message) {
 
 
 function ReadFile(miasto) {
-	var options = {
-		host: "www.coderdojo.cba.pl",
-		port: 80,
-		path: "/index.php?pass=coderbot123&miasto=" + miasto + "&f=odczyt",
-		method: "GET"
-	}
-	var resp = http.request(options, function(res) {
-		res.setEncoding('utf8');
-		res.on('data', function(chunk) {
-			console.log("BODY: " + chunk);
-		});
-	});
+	//	var options = {
+	//		host: "www.coderdojo.cba.pl",
+	//		port: 80,
+	//		path: "/index.php?pass=coderbot123&miasto=" + miasto + "&f=odczyt",
+	//		method: "GET"
+	//	}
+	//	var resp = http.request(options, function(res) {
+	///		res.setEncoding('utf8');
+	////	res.on('data', function(chunk) {
+	//	console.log("BODY: " + chunk);
+	/////		});
+	//	});
 
-	return resp;
+
+
+	http = require('http')
+
+	options =
+		host: "/index.php?pass=coderbot123&miasto=" + miasto + "&f=odczyt"
+	path: '/'
+
+	request = http.get options, (response) - >
+		console.log("Got response: " + response.statusCode)
+	console.log(response.headers)
+	console.dir(response)
+	response.on 'data', (chunk) - >
+		console.log('body: ' + chunk)
+
+	request.on 'error', (error) - >
+		console.log("Got error: " + error.message)
+
+
+
+	return response;
 };

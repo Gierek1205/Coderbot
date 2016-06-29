@@ -176,7 +176,20 @@ function ZapiszPlik(miasto, message) {
 
 };
 
+
 function ReadFile(miasto) {
-	var resp = http.get(host: "http://www.coderbot.cba.pl", path: "/index.php?pass=coderbot123&miasto=" + miasto + "&f=odczyt");
+	var options = {
+		host: "www.coderdojo.cba.pl",
+		port: 80,
+		path: "/index.php?pass=coderbot123&miasto=" + miasto + "&f=odczyt",
+		method: "GET"
+	}
+	var resp = http.request(options, function(res) {
+		res.setEncoding('utf8');
+		res.on('data', function(chunk) {
+			console.log("BODY: " + chunk);
+		});
+	});
+
 	return resp;
 };

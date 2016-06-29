@@ -66,73 +66,72 @@ app.post('/webhook', function(req, res) {
 					text: "Udalo ci sie ustawic zmienna na: " + process.env.CIESZYN_INFO
 				});
 
-			} else if (event.message.text === "!pokaz") // 				<<<----- wyswietlanie z bazy danych!!
-			{
+			} else if (event.message.text === "!pokaz") {
 				sendMessage(event.sender.id, {
 					text: "ID: \n" + "MACIEK_ID: " + process.env.MACIEK_ID + "\nFRANEK_ID: " + process.env.FRANEK_ID +
 						"\nCIESZYN_INFO: " + process.env.CIESZYN_INFO
 				});
 
 
-			}
 
-		} else if (event.message.text.toLowerCase() === "miasta") {
+			} else if (event.message.text.toLowerCase() === "miasta") {
 
-			sendMessage(event.sender.id, {
-				text: "Lista miast w których znajduje się CoderDojo: " + "\n" +
-					"Warszawa" + "\n" + "Cieszyn" + "\n" + "Cisie" + "\n" + "Zambrów" + "\n" + "Białystok" + "\n" + "Gdańsk" + "\n" + "Gliwice" + "\n" + "Poznań"
-			});
-
-		} else if (event.message.text.split(" ")[0].toLowerCase() === "info") {
-			var end = 0;
-			for (var z = 0; z < cities.length; z++) {
-				if (event.message.text.toLowerCase().split(" ")[1] == cities[z].toLowerCase()) {
-					sendMessage(event.sender.id, {
-						text: miastaInfo[z]
-					});
-					end++;
-				}
-			}
-
-			if (end === 0) {
 				sendMessage(event.sender.id, {
-					text: "Błąd, wpisz: !info <miasto>"
+					text: "Lista miast w których znajduje się CoderDojo: " + "\n" +
+						"Warszawa" + "\n" + "Cieszyn" + "\n" + "Cisie" + "\n" + "Zambrów" + "\n" + "Białystok" + "\n" + "Gdańsk" + "\n" + "Gliwice" + "\n" + "Poznań"
+				});
+
+			} else if (event.message.text.split(" ")[0].toLowerCase() === "info") {
+				var end = 0;
+				for (var z = 0; z < cities.length; z++) {
+					if (event.message.text.toLowerCase().split(" ")[1] == cities[z].toLowerCase()) {
+						sendMessage(event.sender.id, {
+							text: miastaInfo[z]
+						});
+						end++;
+					}
+				}
+
+				if (end === 0) {
+					sendMessage(event.sender.id, {
+						text: "Błąd, wpisz: !info <miasto>"
+					});
+				}
+
+			} else if (event.message.text === "!whoami") {
+
+				sendMessage(event.sender.id, {
+					text: event.sender.id
+				});
+
+			} else if (event.message.text === "!edit") {
+
+				sendMessage(event.sender.id, {
+					text: "Prawidłowe użycie: !edit \"<miasto>\" \"<tresc wiadomosci>\""
+				});
+
+
+			} else if (event.message.text.split(" ")[0] === "!edit") {
+				for (var z = 0; z < cities.length; z++) {
+					if (event.message.text.toLowerCase().split('"')[1] == cities[z].toLowerCase()) {
+
+						sendMessage(event.sender.id, {
+							text: cities[z] + ": \n" + miastaInfo[z] + "\n    zmienione na: \n" + event.message.text.split('"')[3]
+						});
+
+						miastaInfo[z] = event.message.text.split('"')[3];
+					}
+				}
+
+			} else {
+				sendMessage(event.sender.id, {
+					text: "Jesli nie wiesz co zrobic wpisz !help.  " + event.message.text
 				});
 			}
 
-		} else if (event.message.text === "!whoami") {
 
-			sendMessage(event.sender.id, {
-				text: event.sender.id
-			});
-
-		} else if (event.message.text === "!edit") {
-
-			sendMessage(event.sender.id, {
-				text: "Prawidłowe użycie: !edit \"<miasto>\" \"<tresc wiadomosci>\""
-			});
-
-
-		} else if (event.message.text.split(" ")[0] === "!edit") {
-			for (var z = 0; z < cities.length; z++) {
-				if (event.message.text.toLowerCase().split('"')[1] == cities[z].toLowerCase()) {
-
-					sendMessage(event.sender.id, {
-						text: cities[z] + ": \n" + miastaInfo[z] + "\n    zmienione na: \n" + event.message.text.split('"')[3]
-					});
-
-					miastaInfo[z] = event.message.text.split('"')[3];
-				}
-			}
-
-		} else {
-			sendMessage(event.sender.id, {
-				text: "Jesli nie wiesz co zrobic wpisz !help.  " + event.message.text
-			});
+			res.sendStatus(200);
 		}
-
-
-		res.sendStatus(200);
 	}
 });
 

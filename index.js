@@ -49,24 +49,12 @@ app.post('/webhook', function(req, res) {
 
 			} else if (event.message.text.split(" ")[0] === "!save") {
 
-				var myOptions = {
-					city: 'Cieszyn',
-					message: event.message.text.split(" ")[1]
-				};
+				var city = event.message.text.split('"')[1];
+				var wiadomosc = event.message.text.split('"')[3];
 
-				var data = JSON.stringify(myOptions);
+				ZapiszPlik(city, wiadomosc);
 
 
-				fs.writeFile('./config.json', data, function(err) {
-					if (err) {
-						console.log('There has been an error saving your configuration data.');
-						console.log(err.message);
-						return;
-					}
-					sendMessage(event.sender.id, {
-						text: "Zapisałeś!!"
-					});
-				});
 
 			} else if (event.message.text.split(" ")[0] === "!ustaw") {
 
@@ -85,77 +73,67 @@ app.post('/webhook', function(req, res) {
 						"\nCIESZYN_INFO: " + process.env.CIESZYN_INFO
 				});
 
-				var data = fs.readFileSync('./config.json'),
-					city;
 
-				try {
-					city = JSON.parse(data);
+			}
+
+		} else if (event.message.text.toLowerCase() === "miasta") {
+
+			sendMessage(event.sender.id, {
+				text: "Lista miast w których znajduje się CoderDojo: " + "\n" +
+					"Warszawa" + "\n" + "Cieszyn" + "\n" + "Cisie" + "\n" + "Zambrów" + "\n" + "Białystok" + "\n" + "Gdańsk" + "\n" + "Gliwice" + "\n" + "Poznań"
+			});
+
+		} else if (event.message.text.split(" ")[0].toLowerCase() === "info") {
+			var end = 0;
+			for (var z = 0; z < cities.length; z++) {
+				if (event.message.text.toLowerCase().split(" ")[1] == cities[z].toLowerCase()) {
 					sendMessage(event.sender.id, {
-						text: "Wiadomosc: \n" + city.message
+						text: miastaInfo[z]
 					});
-				} catch (err) {
-					console.log('There has been an error parsing your JSON.')
-					console.log(err);
+					end++;
 				}
+			}
 
-			} else if (event.message.text.toLowerCase() === "miasta") {
-
+			if (end === 0) {
 				sendMessage(event.sender.id, {
-					text: "Lista miast w których znajduje się CoderDojo: " + "\n" +
-						"Warszawa" + "\n" + "Cieszyn" + "\n" + "Cisie" + "\n" + "Zambrów" + "\n" + "Białystok" + "\n" + "Gdańsk" + "\n" + "Gliwice" + "\n" + "Poznań"
-				});
-
-			} else if (event.message.text.split(" ")[0].toLowerCase() === "info") {
-				var end = 0;
-				for (var z = 0; z < cities.length; z++) {
-					if (event.message.text.toLowerCase().split(" ")[1] == cities[z].toLowerCase()) {
-						sendMessage(event.sender.id, {
-							text: miastaInfo[z]
-						});
-						end++;
-					}
-				}
-
-				if (end === 0) {
-					sendMessage(event.sender.id, {
-						text: "Błąd, wpisz: !info <miasto>"
-					});
-				}
-
-			} else if (event.message.text === "!whoami") {
-
-				sendMessage(event.sender.id, {
-					text: event.sender.id
-				});
-
-			} else if (event.message.text === "!edit") {
-
-				sendMessage(event.sender.id, {
-					text: "Prawidłowe użycie: !edit \"<miasto>\" \"<tresc wiadomosci>\""
-				});
-
-
-			} else if (event.message.text.split(" ")[0] === "!edit") {
-				for (var z = 0; z < cities.length; z++) {
-					if (event.message.text.toLowerCase().split('"')[1] == cities[z].toLowerCase()) {
-
-						sendMessage(event.sender.id, {
-							text: cities[z] + ": \n" + miastaInfo[z] + "\n    zmienione na: \n" + event.message.text.split('"')[3]
-						});
-
-						miastaInfo[z] = event.message.text.split('"')[3]
-					}
-				}
-
-			} else {
-				sendMessage(event.sender.id, {
-					text: "Jesli nie wiesz co zrobic wpisz !help.  " + event.message.text
+					text: "Błąd, wpisz: !info <miasto>"
 				});
 			}
-		}
 
-		res.sendStatus(200);
+		} else if (event.message.text === "!whoami") {
+
+			sendMessage(event.sender.id, {
+				text: event.sender.id
+			});
+
+		} else if (event.message.text === "!edit") {
+
+			sendMessage(event.sender.id, {
+				text: "Prawidłowe użycie: !edit \"<miasto>\" \"<tresc wiadomosci>\""
+			});
+
+
+		} else if (event.message.text.split(" ")[0] === "!edit") {
+			for (var z = 0; z < cities.length; z++) {
+				if (event.message.text.toLowerCase().split('"')[1] == cities[z].toLowerCase()) {
+
+					sendMessage(event.sender.id, {
+						text: cities[z] + ": \n" + miastaInfo[z] + "\n    zmienione na: \n" + event.message.text.split('"')[3]
+					});
+
+					miastaInfo[z] = event.message.text.split('"')[3];
+				}
+			}
+
+		} else {
+			sendMessage(event.sender.id, {
+				text: "Jesli nie wiesz co zrobic wpisz !help.  " + event.message.text
+			});
+		}
 	}
+
+	res.sendStatus(200);
+}
 });
 
 // generic function sending messagesp-------------------------------------------------------------------------------------------------------
@@ -179,4 +157,18 @@ function sendMessage(recipientId, message) {
 			console.log('Error: ', response.body.error);
 		}
 	});
+};
+
+function ZapiszPlik(miasto, message) {
+	var request = require("request");
+
+	request("http://www.coderbot.cba.pl/index.php?pass=coderbot123&miasto=" + miasto + "&tekst=" + message + "&t=0x01",
+		function(error, response, body) {
+			console.log(body);
+		});
+};
+
+function ReadFile(miasto) {
+	var resp = http.get("http://www.coderbot.cba.pl/index.php?pass=coderbot123&miasto=" + miasto + "&t=0x00")
+
 };

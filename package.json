@@ -7,9 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
-  "author": "Franek Matusiak",
+  "author": "Coderbot",
   "license": "ISC",
-  "dependencies": { 
+  "dependencies": {
     "body-parser": "^1.15.0",
     "express": "^4.13.4",
     "moment": "^2.13.0",

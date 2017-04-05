@@ -52,13 +52,13 @@ app.post('/webhook', function(req, res) {
 				var city = event.message.text.split('"')[1];
 				var wiadomosc = event.message.text.split('"')[3];
 
-				ZapiszPlik(city, wiadomosc);
-				/*
+				
+				
 								sendMessage(event.sender.id, {
 									text: city + ": " + ReadFile(city)
 								});
 
-				*/
+				
 			} else if (event.message.text.split(" ")[0] === "!ustaw") {
 
 				//tutaj dodawanie do bazy danych!!!
@@ -159,16 +159,4 @@ function sendMessage(recipientId, message) {
 			console.log('Error: ', response.body.error);
 		}
 	});
-};
-
-function ZapiszPlik(miasto, message) {
-	var request = require("request");
-
-	request("http://www.coderbot.cba.pl/index.php?pass=coderbot123&miasto=" + miasto + "&tekst=" + message + "&f=zapisz",
-		function(error, response, body) {
-			console.log(body);
-		});
-
-
-
 };
